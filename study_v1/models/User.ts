@@ -1,6 +1,6 @@
 // import packages
 import bcrypt from "bcrypt";
-import mongoose, { Schema, model } from "mongoose";
+import mongoose, { Schema, model, models } from "mongoose";
 
 // create user interface data types
 export interface IUser {
@@ -38,4 +38,6 @@ userSchema.pre("save", async function (next) {
    next();
 });
 
-export const User = model("User", userSchema);
+const User = models?.User || model<IUser>("User", userSchema);
+
+export default User;
